@@ -20,3 +20,16 @@ def about():
 def view():
     data = load_data()
     return data
+
+@app.get('/patient/{patient_id}')
+def view_patient(patient_id: str):
+    data = load_data()
+   
+    # for patient in data:
+    #     if patient['id'] == patient_id:
+    #         return patient
+    # return {"message": "Patient not found."}
+    if patient_id in data:
+        return data[patient_id]
+    return {"message": "Patient not found."}
+    
