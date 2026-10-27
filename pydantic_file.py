@@ -1,12 +1,12 @@
 from pydantic import BaseModel, EmailStr,Field
 from typing import List,Dict,Optional, Annotated
 class Patient( BaseModel):
-    name: Annotated[str, Field(min_length=1, max_length=100 , title = "Name of the patient" , description = "Name should be between 1 and 100 characters", examples = ["John Doe", "Jane Smith"])]
+    name: Annotated[str, Field(min_length=1, max_length=100 , title = "Name of the patient" , description = "Name should be between 1 and 100 characters", examples = ["John Doe", "Jane Smith"])] 
     email: EmailStr
     age: int = Field(gt = 0 , lt = 120)
     sex: str
     weight: float = Field(gt=0)
-    married: bool
+    married: Annotated[bool, Field(title = "Marital Status" , description = "Indicates whether the patient is married or not")]
     allergies: Optional[List[str]] = None
     contact: Dict[str, str]
 
@@ -42,4 +42,7 @@ patient_info = {'name': 'Julia Ann', 'email': 'julia.ann@example.com', 'age': 50
 patient2 = Patient(**patient_info)
 
 insert_patient(patient1)
+print("--------------------------------------------")
+print(patient1)
+print("--------------------------------------------")
 update_patient(patient2)
