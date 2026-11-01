@@ -169,20 +169,45 @@ def create_patient(patient: Patient):
         content={"message": "Patient created successfully."}
     )
 
+
 @app.put('/edit/{patient_id}')
-def update_parient(patient_id : str , patient_update : PatientUpdate):
+def update_patient(patient_id: str, patient_update: PatientUpdate):
+
+    # Step 1: Load existing patient data
     data = load_data()
 
+    # Step 2: Check whether patient exists
     if patient_id not in data:
         raise HTTPException(
             status_code=404,
             detail="Patient not found."
         )
 
-    # Update the patient data with the provided fields
+    # Step 3: Update the provided fields
     for field, value in patient_update.model_dump(exclude_unset=True).items():
         data[patient_id][field] = value
 
+    # Step 4: Recalculate BMI using updated height and weight
+    height = data[patient_id]["height"]
+    weight = data[patient_id]["weight"]
+
+    bmi = round(weight / ((height / 100) ** 2), 2)
+
+    # Step 5: Recalculate verdict
+    if bmi < 18.5:
+        verdict = "Underweight"
+    elif bmi < 25:
+        verdict = "Normal weight"
+    elif bmi < 30:
+        verdict = "Overweight"
+    else:
+        verdict = "Obesity"
+
+    # Step 6: Update BMI and verdict in patient data
+    data[patient_id]["bmi"] = bmi
+    data[patient_id]["verdict"] = verdict
+
+    # Step 7: Save updated data
     save_data(data)
 
     return {"message": "Patient updated successfully."}
