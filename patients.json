@@ -1,13 +1,13 @@
 {
     "P001": {
         "name": "Ananya Verma",
-        "city": "Guwahati",
+        "city": "Nagpur",
         "age": 28,
         "gender": "female",
         "height": 1.65,
         "weight": 90.0,
-        "bmi": 33.06,
-        "verdict": "Obese"
+        "bmi": 330578.51,
+        "verdict": "Obesity"
     },
     "P002": {
         "name": "Ravi Mehta",
@@ -36,18 +36,8 @@
         "gender": "male",
         "height": 1.8,
         "weight": 90.0,
-        "bmi": 27.78,
-        "verdict": "Normal"
-    },
-    "P005": {
-        "name": "Neha Sinha",
-        "city": "Kolkata",
-        "age": 30,
-        "gender": "female",
-        "height": 1.55,
-        "weight": 75,
-        "bmi": 31.22,
-        "verdict": "Obese"
+        "bmi": 277777.78,
+        "verdict": "Obesity"
     },
     "P007": {
         "name": "Atharva Pate",
